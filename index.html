@@ -1,0 +1,467 @@
+<html>
+	<head>
+		<title>Arjun R R - Web Developer & Blogger | ArjunRR.com</title>
+		<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="css/custom.css" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Alegreya+Sans+SC" rel="stylesheet" type="text/css">
+		<meta name="Description" content="Arjun is a blogger and a web developer pursuing his final year of engineering. Arjun R R is the founder of CryptLife tech blog.">
+		<meta name="Keywords" content="founder of cryptlife, arjun r r, arjunrr, arjun web developer, web developer, cryptlife arjun, arjun rajendran, php developer, blogger, arjun blogger">
+		<meta property="og:title" content="Arjun R R - Web Developer & Blogger" />
+		<meta property="og:site_name" content="Arjun R R"/>
+		<meta property="og:url" content="http://arjunrr.com" />
+		<meta property="og:description" content="Arjun is a blogger and a web developer pursuing his final year of engineering. A born geek and a passionate guy about computers and internet."/>
+		<meta property="fb:app_id" content="347627595317278" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="article:author" content="https://www.facebook.com/rrarjun" />
+		<meta property="article:publisher" content="https://www.facebook.com/rrarjun" />
+		<meta property="og:image" content="http://arjunrr.com/img/arjunrr.jpg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="js/modernizr.js"></script>
+		<script>
+		function validateEmail(email) {
+									    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+									    return re.test(email);
+									}
+									function sendMail() {
+
+										$("#message-status").html("");
+
+										var data = $('#form').serialize();
+										var name = document.getElementById('name').value.trim();
+										var email = document.getElementById('email').value.trim();
+										var msg = document.getElementById('message').value.trim();
+
+										if(name == "" || email == "" || msg == "") {
+											$('#message-status').html("<p>&nbsp; <font size='2' color='red'>All fields are required!<br/>&nbsp; Message was not sent.</font></p>");
+										}
+										else if(!(validateEmail(email))) {
+											$('#message-status').html("<p>&nbsp; <font size='2' color='red'>Invalid Email Address!<br/>&nbsp; Message was not sent.</font></p>");	
+										} else {
+											$.ajax({
+												type: 'POST',
+												url: 'emailme.php',
+												data: data,
+												beforeSend: function() {
+													$('#send-button').attr('disabled','disabled');
+													$('#send-button').html('Sending...');
+												},
+												success: function(data) {
+													$('#send-button').removeAttr('disabled');
+													$('#send-button').html("<span class='glyphicon glyphicon-send'></span> &nbsp;Send Message");
+													if(data != "<div class='alert'><font color='red'>An error occurred! :-(</font></div>") {
+														document.getElementById('name').value = "";
+														document.getElementById('email').value = "";
+														document.getElementById('message').value = "";
+													}
+													$('#message-status').html(data);
+												}
+											});
+										}
+										return false;
+									}
+		$(window).load(function() {
+			$(".loader").fadeOut("slow");
+			
+		});
+		function load(param) {
+			var page = "";
+			if(param == 'about' || param == 'works' || param == 'blog' || param == 'contact') {
+				page = param;
+			}
+			else {
+				if(window.location.hash == "")
+					page = 'about';
+				else
+					page = window.location.hash.substr(1);
+			}
+			var loc = document.getElementById(page);
+			document.getElementById('contact').setAttribute('style','display:none');
+			document.getElementById('blog').setAttribute('style','display:none');
+			document.getElementById('works').setAttribute('style','display:none');
+			document.getElementById('about').setAttribute('style','display:none');
+			if(page == 'about') {
+				//loc.setAttribute('style','display:block');
+				$('#' + page).fadeIn();
+				$('.blog').removeAttr('id');
+				$('.works').removeAttr('id');
+				$('.contact').removeAttr('id');
+				$('.about').attr('id','active');
+			}
+			else if(page == 'blog') {
+				$('#' + page).fadeIn();
+				$('.about').removeAttr('id');
+				$('.works').removeAttr('id');
+				$('.contact').removeAttr('id');	
+				$('.blog').attr('id','active');
+			}
+			else if(page == 'works') {
+				$('#' + page).slideDown();
+				$('.blog').removeAttr('id');
+				$('.about').removeAttr('id');
+				$('.contact').removeAttr('id');
+				$('.works').attr('id','active');
+			}
+			else if(page == 'contact') {
+				$('#' + page).fadeIn();
+				$('.blog').removeAttr('id');
+				$('.works').removeAttr('id');
+				$('.about').removeAttr('id');
+				$('.contact').attr('id','active');
+			}
+		}
+		$(document).ready(function(){
+			$('#mabout').click(function(e) {
+    				load('about');
+			});
+			$('#mworks').click(function(e) {
+    				load('works');
+			});
+			$('#mblog').click(function(e) {
+    				load('blog');
+			});
+			$('#mcontact').click(function(e) {
+    				load('contact');
+			});
+		});
+		
+		</script>
+	</head>
+	<body onload="load()">
+		<div class="loader">
+			<img src="img/loading.GIF">
+		</div>
+		<div class="container">
+			<header>
+				<div class="row">
+					<div class="col-md-2">
+						<img src="img/mypic2.png">
+					</div>
+					<div class="col-md-10">
+						<h1>ARJUN R R <a href="MyResume.pdf"><button class="btn btn-success col-md-offset-7" disabled><span class="glyphicon glyphicon-download"></span> Resume</button></a></h1>
+						<div class="basic-det">
+							<span class="basic-det-indi">
+								<span class="glyphicon glyphicon-map-marker"></span> Madurai, TN, IN
+							</span>
+							<span class="basic-det-indi">
+								<span class="glyphicon glyphicon-phone"></span> +91 944 - 367 - 6221
+							</span>
+							<span class="basic-det-indi">
+								<span class="glyphicon glyphicon-envelope"></span> arjun2504 [at] gmail [dot] com
+							</span>
+						</div>
+					</div>
+				</div>
+			</header>
+			
+			<!--<img src="img/shadow.png" style="max-width: 100%">-->
+
+			<div class="row">
+				<div class="sidebar">
+					<div class="col-md-2 col-lg-2">
+						
+						<a href="#about" id="mabout">
+							<div class="about menu">
+								<span class="glyphicon glyphicon-user"></span>
+								<p>about</p>
+							</div>
+						</a>
+						<img src="img/shadow.png">
+						
+						
+						
+						
+						<a href="#works" id="mworks">
+							<div class="works menu">
+								<span class="glyphicon glyphicon-briefcase"></span>
+								<p>works</p>
+							</div>
+						</a>
+						<img src="img/shadow.png">
+						
+						
+
+						
+						<a href="#blog" id="mblog">
+							<div class="blog menu">
+								<span class="glyphicon glyphicon-pencil"></span>
+								<p>blog</p>
+							</div>
+						</a>
+						<img src="img/shadow.png">
+						
+
+
+						
+						<a href="#contact" id="mcontact">
+							<div class="contact menu">
+								<span class="glyphicon glyphicon-phone-alt"></span>
+								<p>contact</p>
+							</div>
+						</a>
+						<img src="img/shadow.png">
+						
+					</div>
+				</div>
+
+				<div class="col-md-10">
+					<div class="content">
+						<div id="about" style="display:none">
+							<p>
+								Hello, There!
+							</p>
+							<p>
+								My name is <strong>Arjun</strong>, founder &amp; blogger of <a href="http://www.cryptlife.com" target="_blank">CryptLife</a>, a technology web log that caters internet tips, tricks, gadget reviews, computer tweaks and more.
+							</p>
+							<p>
+								A <em>born geek</em> and a passionate guy about computers and internet. 
+							</p>
+							<p>
+								I love connecting with like-minded people but a bit introvert in case of people with interest that differ. I believe <em>sharing knowledge</em> is the powerful way to make the world big and so I came up with CryptLife.
+							</p>
+							<p>
+								CryptLife has attracted over <strong>2 million page views</strong> since the start and I hope the rate goes faster in future as well.
+							</p>
+							<p>
+								I&apos;m a huge social media enthusiast and a Script Kiddie who plays around with browser add-ons, JavaScript and other tools to make the experience better than usual.
+							</p>
+							<p>
+								I also <strong>develop websites with PHP and WordPress</strong> with high creative and innovative thinking.
+							</p>
+							<p>
+								Regarding my education, I&apos;m doing my final year of Computer Science &amp; Engineering at K.L.N. College of Engineering, Sivagangai. I did my schooling at S.B.O.A. Matriculation &amp; Higher Secondary School, Madurai.
+							</p>
+						</div>
+
+						<div id="works" style="display:none">
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>CryptLife <a href="http://www.cryptlife.com" target="_blank" title="Go to CryptLife.com"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A technology web log created to share latest internet tips, tricks, computer tweaks, gadget reviews, tech news and more.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img align="center" src="img/cryptlife-logo.png">
+								</div>
+							</div>
+							<hr/>
+							
+							
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Pray For Chennai <a href="http://prayforchennai.in" target="_blank" title="Go to PrayForChennai.in"><span class="glyphicon glyphicon-link"></span></a> <a href="https://github.com/arjun2504/prayforchennai" target="_blank" title="View on GitHub"><span class="fa fa-github"></span></a></h4>
+									<p class="work-des">
+										Facebook app to spread the word about Chennai floods. Users can connect with Facebook and apply predefined <i>#PrayForChennai</i> watermark and make the new photo as their profile photo.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img align="center" src="img/prayforchennai_ico.png">
+								</div>
+							</div>
+							<hr/>
+							
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Advanced Warehouse Management System <a href="http://wms.illuzion.in" target="_blank" title="Go to WMS portal of Illuzion.in"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A monitory system for ecommerce store to monitor incoming orders, outgoing products, billing, bar code generation and bulk order processing. Works with WooCommerce WordPress Plugin.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/wms.png">
+								</div>
+							</div>
+							<hr/>
+
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>StreetShoppie <a href="#" target="_blank" title="View Streetshoppie Demo (Temporarily Disabled due to security issue)"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										Website that connects offline mobile retail store and customers. Features mobile comparision and location-based data for shops.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/streetshoppie.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>MasterGenius <a href="demo/mg" target="_blank" title="View MasterGenius Demo"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										Web application that lets teachers to share notes, conduct tests, clear doubts, make announcements and more. Also, it connects students who can download notes, ask doubts, write tests, message. Additionally, comprises a discussion forum to discuss about various topics categorized by college department.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/master-genius.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Faculty Achievements Module <a href="demo/fam" target="_blank" title="View Faculty Achievements Module Demo"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A web application for CSE department intranet of K.L.N. College of Engineering, Sivagangai to record and analyse the achievements, events, papers presented / published and more by faculties.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/fam.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Live Support Chat for <abbr title="Customer Relationship Management">CRM</abbr> <a href="demo/chat" target="_blank" title="View Live Chat Demo"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A live support chat to have a live chat with registered customers. Involves sound notifications and buzzes.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/chat.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Reflechir &apos;15 National Level Symposium Website <a href="http://www.klnce.edu/reflechir15" target="_blank" title="Go to Reflechir &apos;15 National Level Symposium Website Organized by ECE Department of KLNCE, Sivagangai"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A symposium website for Electronics &amp; Communication department of K.L.N. College of Engineering, Sivagangai.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/reflechir.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Quick Match  <a href="https://github.com/arjun2504/QuickMatch" target="_blank" title="View on GitHub"><span class="fa fa-github"></span></a></h4>
+									<p class="work-des">
+										A command line card game that runs on Windows operating system. The winner is the one who gets all 5 cards of same suite.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/quickmatch.png">
+								</div>
+							</div>
+							
+							<hr/>
+							
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Spark Academy <a href="http://sparksacademy.in" target="_blank" title="Go to SparksAcademy.in"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										Skill development website where students can take up multiple choice test. It generates certificate after the completion of the test. Admin has the ability to schedule test at particular time.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img align="center" src="img/sparks-academy-logo.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>RaaZ Photography <a href="http://raazphotography.com" target="_blank" title="Go to RaazPhotography.com"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A portfolio website for Raaz, a young, professional and an emerging photographer who has a huge social media fame.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img align="center" src="img/raaz-photography.png">
+								</div>
+							</div>
+							<hr/>
+
+							<div class="row">
+								<div class="col-md-8 col-sm-8 col-xs-8">
+									<h4>Touchstone Resort <a href="http://touchstoneresorts.in" target="_blank" title="Go to TouchstoneResorts.in"><span class="glyphicon glyphicon-link"></span></a></h4>
+									<p class="work-des">
+										A website to show off rooms, bars and restaurant of Touchstone Resort, Yelagiri hills, Vellore dist., TN, IN.
+									</p>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4">
+									<img src="img/touchstone-resort.png">
+								</div>
+							</div>
+
+						</div>
+
+						<div id="blog" style="display:none">
+							<div class="col-md-12">
+								Coming soon!
+							</div>
+						</div>
+
+						<div id="contact" style="display:none">
+							<div class="col-md-12">
+								<p>I&apos;d love to hear from you!</p>
+								<p>
+									<ul class="contact-list">
+										<li>Phone: <a href="tel:+919443676221">+91 944-367-6221</a></li>
+										<li>Email: <a href="mailto:arjun2504@gmail.com">arjun2504 [at] gmail [dot] com</a></li>
+										<li class="social">
+											<a href="http://in.linkedin.com/in/arjunrr" target="_blank"><img src="img/social/linkedin.png" alt="LinkedIn" title="LinkedIn"></a>
+											<a href="http://www.facebook.com/rrarjun" target="_blank"><img src="img/social/facebook.png" alt="Facebook" title="Facebook"></a>
+											<a href="http://www.google.com/+ArjunRR" target="_blank"><img src="img/social/googleplus.png" alt="Google+" title="Google+"></a>
+											<a href="http://www.twitter.com/arjunrr" target="_blank"><img src="img/social/twitter.png" alt="Twitter" title="Twitter"></a>
+										</li>
+									</ul>
+								</p>
+								<p>
+									You can also make use of the form below to reach me!
+								</p>
+								<br/>
+								<form class="col-md-8" onsubmit="return sendMail();" id="form">
+								  <div class="form-group">
+								    <label for="name">Name</label>
+								    <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+								  </div>
+								  <div class="form-group">
+								    <label for="email">Email</label>
+								    <input type="email" class="form-control" id="email" name="email" placeholder="yourname@example.com" required>
+								  </div>
+								  <div class="form-group">
+								    <label for="message">Message</label>
+								    <textarea class="form-control" id="message" name="message" required></textarea>
+								  </div>
+								  <button type="submit" class="btn btn-default" id="send-button" style="float:left"><span class="glyphicon glyphicon-send"></span> &nbsp;Send Message</button>
+								  <span id="message-status" style="float:left; margin-top: -7px"></span>
+								</form>
+								
+								
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<hr/>
+
+			<div class="col-md-12">
+				<footer>
+					<center>&copy; 2015 - Arjun R R</center><br/>
+				</footer>				
+			</div>
+		</div>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-4465313-8', 'auto');
+		  ga('send', 'pageview');
+
+		</script>
+	</body>
+</html>
